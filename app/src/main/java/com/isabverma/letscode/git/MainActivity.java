@@ -93,8 +93,17 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            //Intent setting = new Intent(MainActivity.this,SettingsActivity.class);
-            //startActivity(setting);
+
+        }else if(id == R.id.action_about_developers){
+
+        }else if(id == R.id.action_feedback){
+
+        }else if(id == R.id.action_rate_us){
+
+        }else if(id == R.id.action_share){
+
+        }else if(id == R.id.action_about_developers){
+
         }
 
         return super.onOptionsItemSelected(item);
