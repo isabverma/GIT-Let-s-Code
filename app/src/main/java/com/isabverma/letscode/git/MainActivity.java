@@ -93,17 +93,17 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
+            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
         }else if(id == R.id.action_about_developers){
-
+            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
         }else if(id == R.id.action_feedback){
-
+            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
         }else if(id == R.id.action_rate_us){
-
+            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
         }else if(id == R.id.action_share){
-
+            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
         }else if(id == R.id.action_about_developers){
-
+            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
