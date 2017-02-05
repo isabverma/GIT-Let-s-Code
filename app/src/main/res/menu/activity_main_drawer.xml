@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_git"
+            android:icon="@android:drawable/btn_default"
+            android:title="GIT???" />
+    </group>
+
+    <item android:title="How to start">
+        <menu>
+            <item
+                android:id="@+id/nav_download"
+                android:icon="@android:drawable/sym_action_email"
+                android:title="Download" />
+            <item
+                android:id="@+id/nav_setup"
+                android:icon="@android:drawable/star_on"
+                android:title="Setup" />
+        </menu>
+    </item>
+</menu>
