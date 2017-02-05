@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -96,40 +95,7 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "About Developers Selected..!!!", Toast.LENGTH_SHORT).show();
         }else if(id == R.id.action_feedback){
             Toast.makeText(this, "Feedback Selected..!!!", Toast.LENGTH_SHORT).show();
-        }else if(id == R.id.action_rate_us){
-            Toast.makeText(this, "Rate Us Selected..!!!", Toast.LENGTH_SHORT).show();
-        }else if(id == R.id.action_share){
-            Toast.makeText(this, "Share Selected..!!!", Toast.LENGTH_SHORT).show();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_git) {
-            LinearLayout mainLayout = (LinearLayout) findViewById(R.id.main_container);
-            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = inflater.inflate(R.layout.content_main, null);
-            mainLayout.removeAllViews();
-            mainLayout.addView(layout);
-        } else if (id == R.id.nav_setup) {
-            LinearLayout mainLayout = (LinearLayout) findViewById(R.id.main_container);
-            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = inflater.inflate(R.layout.nav_download, null);
-            mainLayout.removeAllViews();
-            mainLayout.addView(layout);
-        } else if (id == R.id.nav_download) {
-            LinearLayout mainLayout = (LinearLayout) findViewById(R.id.main_container);
-            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = inflater.inflate(R.layout.nav_download, null);
-            mainLayout.removeAllViews();
-            mainLayout.addView(layout);
-        } else if (id == R.id.nav_git) { //for rate us
+        }else if(id == R.id.action_rate_us){ //for rate us
             Uri uri = Uri.parse("market://details?id=com.isabverma.letscode.git");
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
             // To count with Play market backstack, After pressing back button,
@@ -139,7 +105,51 @@ public class MainActivity extends AppCompatActivity
                 startActivity(goToMarket);
             } catch (ActivityNotFoundException e) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName()))); }
+        }else if(id == R.id.action_share){
+            Toast.makeText(this, "Share Selected..!!!", Toast.LENGTH_SHORT).show();
         }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.main_container);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout;
+        if (id == R.id.nav_git) {
+            getSupportActionBar().setTitle("GIT Basics");
+            layout = inflater.inflate(R.layout.content_main, null);
+        } else if (id == R.id.nav_download) {
+            getSupportActionBar().setTitle("GIT Download");
+            layout = inflater.inflate(R.layout.nav_git_download, null);
+        } else if (id == R.id.nav_setup) {
+            getSupportActionBar().setTitle("GIT Setup");
+            layout = inflater.inflate(R.layout.nav_git_setup, null);
+        } else if (id == R.id.nav_git_init) {
+            getSupportActionBar().setTitle("GIT init");
+            layout = inflater.inflate(R.layout.nav_git_init, null);
+        } else if (id == R.id.nav_git_clone) {
+            getSupportActionBar().setTitle("GIT clone");
+            layout = inflater.inflate(R.layout.nav_git_clone, null);
+        } else if (id == R.id.nav_git_config_user_name) {
+            getSupportActionBar().setTitle("GIT config user.name");
+            layout = inflater.inflate(R.layout.nav_git_config_user_name, null);
+        } else if (id == R.id.nav_git_congif_user_eamil) {
+            getSupportActionBar().setTitle("GIT config user.email");
+            layout = inflater.inflate(R.layout.nav_git_config_user_email, null);
+        } else if (id == R.id.nav_git_congif_color_ui) {
+            getSupportActionBar().setTitle("GIT config color.ui");
+            layout = inflater.inflate(R.layout.nav_git_config_color_ui, null);
+        } else{
+            getSupportActionBar().setTitle("GIT Basics");
+            layout = inflater.inflate(R.layout.content_main, null);
+        }
+
+        mainLayout.removeAllViews();
+        mainLayout.addView(layout);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
