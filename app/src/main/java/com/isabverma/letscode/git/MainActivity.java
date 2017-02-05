@@ -18,11 +18,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -95,15 +93,13 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
         }else if(id == R.id.action_about_developers){
-            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "About Developers Selected..!!!", Toast.LENGTH_SHORT).show();
         }else if(id == R.id.action_feedback){
-            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Feedback Selected..!!!", Toast.LENGTH_SHORT).show();
         }else if(id == R.id.action_rate_us){
-            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Rate Us Selected..!!!", Toast.LENGTH_SHORT).show();
         }else if(id == R.id.action_share){
-            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
-        }else if(id == R.id.action_about_developers){
-            Toast.makeText(this, "Settings Selected..!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Share Selected..!!!", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);

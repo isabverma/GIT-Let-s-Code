@@ -20,4 +20,32 @@
                 android:title="Setup" />
         </menu>
     </item>
+    <item android:title="Create Repository">
+        <menu>
+            <item
+                android:id="@+id/nav_git_init"
+                android:icon="@android:drawable/sym_action_email"
+                android:title="Git init" />
+            <item
+                android:id="@+id/nav_git_clone"
+                android:icon="@android:drawable/star_on"
+                android:title="Git config" />
+        </menu>
+    </item>
+    <item android:title="Configure Tooling">
+        <menu>
+            <item
+                android:id="@+id/nav_git_config_user.name"
+                android:icon="@android:drawable/sym_action_email"
+                android:title="Config - user.name" />
+            <item
+                android:id="@+id/nav_git_congif_user.eamil"
+                android:icon="@android:drawable/star_on"
+                android:title="Config - user.email" />
+            <item
+                android:id="@+id/nav_git_congif_color.ui"
+                android:icon="@android:drawable/star_on"
+                android:title="Config - color.ui" />
+        </menu>
+    </item>
 </menu>
