@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -20,24 +19,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Context context;
-    String NavGit ="<h2>GIT</h2><br><p>A tool used for versioning</p>";
-    String NavGitDownload="<h2>GIT Download</h2><br><p>Download the Git</p>";
-    String NavGitSetup="<h2>GIT Setup</h2><br><p>Setup the Git</p>";
-    String NavGitInit="<h2>GIT INIT</h2><br><p>Setup the Git</p>";
-    String NavGitClone="<h2>GIT Clone</h2><br><p>Setup the Git</p>";
-    String NavGitConfigUserName="<h2>GIT Username</h2><br><p>Setup the Git</p>";
-    String NavGitConfigUserEmail="<h2>GIT Email</h2><br><p>Setup the Git</p>";
-    String NavGitConfigColorUi="<h2>GIT Color UI</h2><br><p>Setup the Git</p>";
-
+    String folderPath = "file:android_asset/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +46,10 @@ public class MainActivity extends AppCompatActivity
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.main_container);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.content_main, null);
-        TextView name = (TextView)layout.findViewById(R.id.content_main_text_view);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            getSupportActionBar().setTitle("GIT Basics");
-            name.setText(Html.fromHtml(NavGit, Html.FROM_HTML_MODE_COMPACT));
-        } else{
-            getSupportActionBar().setTitle("GIT Basics");
-            name.setText(Html.fromHtml(NavGit));
-        }
+        final WebView webView = (WebView)layout.findViewById(R.id.content_main_web_view);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(folderPath + "index.html");
+        getSupportActionBar().setTitle("GIT Basics");
         mainLayout.removeAllViews();
         mainLayout.addView(layout);
 
@@ -63,8 +57,13 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = "Let's Code - GIT, a very cool and informative android application available in play store to download for free.\nCheck it out now.\n\nDownload link : https://play.google.com/store/apps/details?id=com.isabverma.letscode.git";
+                String shareSub = "Let's Code - GIT Android Application";
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share using"));
             }
         });
 
@@ -144,68 +143,10 @@ public class MainActivity extends AppCompatActivity
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.main_container);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.content_main, null);
-        TextView name = (TextView)layout.findViewById(R.id.content_main_text_view);
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (id == R.id.nav_git) {
-                getSupportActionBar().setTitle("GIT Basics");
-                name.setText(Html.fromHtml(NavGit, Html.FROM_HTML_MODE_COMPACT));
-            } else if (id == R.id.nav_download) {
-                getSupportActionBar().setTitle("GIT Download");
-                name.setText(Html.fromHtml(NavGitDownload, Html.FROM_HTML_MODE_COMPACT));
-            } else if (id == R.id.nav_setup) {
-                getSupportActionBar().setTitle("GIT Setup");
-                name.setText(Html.fromHtml(NavGitSetup, Html.FROM_HTML_MODE_COMPACT));
-            }else if (id == R.id.nav_git_init) {
-                getSupportActionBar().setTitle("GIT init");
-                name.setText(Html.fromHtml(NavGitInit, Html.FROM_HTML_MODE_COMPACT));
-            } else if (id == R.id.nav_git_clone) {
-                getSupportActionBar().setTitle("GIT clone");
-                name.setText(Html.fromHtml(NavGitClone, Html.FROM_HTML_MODE_COMPACT));
-            } else if (id == R.id.nav_git_config_user_name) {
-                getSupportActionBar().setTitle("GIT config user.name");
-                name.setText(Html.fromHtml(NavGitConfigUserName, Html.FROM_HTML_MODE_COMPACT));
-            } else if (id == R.id.nav_git_congif_user_eamil) {
-                getSupportActionBar().setTitle("GIT config user.email");
-                name.setText(Html.fromHtml(NavGitConfigUserEmail, Html.FROM_HTML_MODE_COMPACT));
-            } else if (id == R.id.nav_git_congif_color_ui) {
-                getSupportActionBar().setTitle("GIT config color.ui");
-                name.setText(Html.fromHtml(NavGitConfigColorUi, Html.FROM_HTML_MODE_COMPACT));
-            } else{
-                getSupportActionBar().setTitle("GIT Basics");
-                name.setText(Html.fromHtml(NavGit, Html.FROM_HTML_MODE_COMPACT));
-            }
-        } else{
-            if (id == R.id.nav_git) {
-                getSupportActionBar().setTitle("GIT Basics");
-                name.setText(Html.fromHtml(NavGit));
-            } else if (id == R.id.nav_download) {
-                getSupportActionBar().setTitle("GIT Download");
-                name.setText(Html.fromHtml(NavGitDownload));
-            } else if (id == R.id.nav_setup) {
-                getSupportActionBar().setTitle("GIT Setup");
-                name.setText(Html.fromHtml(NavGitSetup));
-            }else if (id == R.id.nav_git_init) {
-                getSupportActionBar().setTitle("GIT init");
-                name.setText(Html.fromHtml(NavGitInit));
-            } else if (id == R.id.nav_git_clone) {
-                getSupportActionBar().setTitle("GIT clone");
-                name.setText(Html.fromHtml(NavGitClone));
-            } else if (id == R.id.nav_git_config_user_name) {
-                getSupportActionBar().setTitle("GIT config user.name");
-                name.setText(Html.fromHtml(NavGitConfigUserName));
-            } else if (id == R.id.nav_git_congif_user_eamil) {
-                getSupportActionBar().setTitle("GIT config user.email");
-                name.setText(Html.fromHtml(NavGitConfigUserEmail));
-            } else if (id == R.id.nav_git_congif_color_ui) {
-                getSupportActionBar().setTitle("GIT config color.ui");
-                name.setText(Html.fromHtml(NavGitConfigColorUi));
-            } else{
-                getSupportActionBar().setTitle("GIT Basics");
-                name.setText(Html.fromHtml(NavGit));
-            }
-        }
-
+        WebView webView = (WebView)layout.findViewById(R.id.content_main_web_view);
+        webView.getSettings().setJavaScriptEnabled(true);
+        getSupportActionBar().setTitle(item.getTitle());
+        webView.loadUrl(folderPath + item.getTitleCondensed() + ".html");
         mainLayout.removeAllViews();
         mainLayout.addView(layout);
 
